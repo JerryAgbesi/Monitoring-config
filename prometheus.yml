@@ -1,12 +1,20 @@
 global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
 
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
          - targets: ['prometheus:9090']
 
-  # - job_name: 'cadvisor'
-  #   scrape_interval: 5s
-  #   static_configs:
-  #        - targets: ['cadvisor:6060'] 
+  - job_name: 'ubuntu-target'
+    static_configs:
+         - targets: ['01.234.567.8:9100'] 
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: 
+      - alertmanager:9093
+
+rule_files:
+  - "alert-rules.yml"

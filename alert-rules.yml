@@ -1,0 +1,10 @@
+groups:
+- name: Host | Service down
+  rules:
+  - alert: ServiceDown
+    expr: up == 0
+    for: 1m
+    labels:
+      severity: page
+    annotations:
+      description: "{{ $labels.job }} is down"
